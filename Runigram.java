@@ -121,14 +121,10 @@ public class Runigram {
 	// Computes the luminance of the RGB values of the given pixel, using the formula 
 	// lum = 0.299 * r + 0.587 * g + 0.114 * b, and returns a Color object consisting
 	// the three values r = lum, g = lum, b = lum.
-	public static Color luminance(Color pixel,double n) 
+	public static Color luminance(Color pixel) 
 	{
 		//// Replace the following statement with your code
-		if(n==1)
-		{
-			n=0;
-		}
-		 int rgb=(int)(pixel.getRed()*(0.299-n)+pixel.getGreen()*(0.587-n)+pixel.getBlue()*(0.114-n));//targetimage
+		 int rgb=(int)(pixel.getRed()*0.299+pixel.getGreen()*0.587+pixel.getBlue()*0.114);//targetimage
 
 		return new  Color(rgb, rgb, rgb);
 	}
@@ -136,27 +132,20 @@ public class Runigram {
 	/**
 	 * Returns an image which is the grayscaled version of the given image.
 	 */
-	public static Color[][] grayScaled(Color[][] image,double n) {
+	public static Color[][] grayScaled(Color[][] image) {
 		//// Replace the following statement with your code
-		display(image);
-		StdDraw.pause(5000);
-		for(int k=1;k<n;k++)
-		{
+
 		for(int i=0;i<image.length;i++)
 		{
 			for(int j=0;j<image[i].length;j++)
 			{
-				image[i][j]=luminance(image[i][j],0.114/(n-k));
+				image[i][j]=luminance(image[i][j]);
 
 			}
 		}
-		display(image);
-		StdDraw.pause(5000);
 
-	}
 		return  image;
 	}	
-	
 	
 	/**
 	 * Returns an image which is the scaled version of the given image. 
@@ -216,16 +205,6 @@ public class Runigram {
 	 * of the source image.
 	 */
 	public static void morph(Color[][] source, Color[][] target, int n) {
-		//// Replace this comment with your code
-		target=scaled(target,source[0].length,source.length);
-		for(int i=0;i<n;i++)
-		{ 
-			display(blend(source, target, (n-i)/n));
-			StdDraw.pause(5000);
-
-		}
-	}
-	public static void morphtogray(Color[][] source, Color[][] target, int n) {
 		//// Replace this comment with your code
 		target=scaled(target,source[0].length,source.length);
 		for(int i=0;i<n;i++)
