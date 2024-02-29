@@ -26,7 +26,7 @@ public class Runigram {
 		//// You can reuse / overide the contents of the imageOut array.
 	}
 
-		public static Color[][] read(String fileName) {
+	public static Color[][] read(String fileName) {
 		In in = new In(fileName);
 		// Reads the file header, ignoring the first and the third lines.
 		in.readString();
@@ -134,17 +134,17 @@ public class Runigram {
 	 */
 	public static Color[][] grayScaled(Color[][] image) {
 		//// Replace the following statement with your code
-
+         Color[][] gsimage=new Color[image.length][image[0].length];
 		for(int i=0;i<image.length;i++)
 		{
 			for(int j=0;j<image[i].length;j++)
 			{
-				image[i][j]=luminance(image[i][j]);
+				gsimage[i][j]=luminance(image[i][j]);
 
 			}
 		}
 
-		return  image;
+		return  gsimage;
 	}	
 	
 	/**
@@ -209,7 +209,8 @@ public class Runigram {
 		target=scaled(target,source[0].length,source.length);
 		for(int i=0;i<n;i++)
 		{ 
-			display(blend(source, target, (n-i)/n));
+			double alpha=(double)(n-i)/n;
+			display(blend(source, target,alpha));
 			StdDraw.pause(5000);
 
 		}
