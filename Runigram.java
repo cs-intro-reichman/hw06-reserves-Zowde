@@ -26,7 +26,7 @@ public class Runigram {
 		//// You can reuse / overide the contents of the imageOut array.
 	}
 
-	public static Color[][] read(String fileName) {
+		public static Color[][] read(String fileName) {
 		In in = new In(fileName);
 		// Reads the file header, ignoring the first and the third lines.
 		in.readString();
@@ -173,10 +173,12 @@ public class Runigram {
 	 */
 	public static Color blend(Color c1, Color c2, double alpha) {
 		//// Replace the following statement with your code
-	int r=(int)(alpha*(c1.getRed())+(1-alpha)*c2.getRed());
-	int g=(int)(alpha*(c1.getGreen()+(1-alpha)*c2.getGreen()));
-	int b=	(int)(alpha*(c1.getBlue()+(1-alpha)*c2.getBlue()));
-		return new Color(r,g,b);
+	int r=(int)(alpha*c1.getRed()+(1-alpha)*c2.getRed());
+	int g=(int)(alpha*c1.getGreen()+(1-alpha)*c2.getGreen());
+	int b=(int)(alpha*c1.getBlue()+(1-alpha)*c2.getBlue());
+		
+		Color c=new Color(r,g,b);
+		return c;
 	}
 	
 	/**
@@ -207,10 +209,13 @@ public class Runigram {
 	public static void morph(Color[][] source, Color[][] target, int n) {
 		//// Replace this comment with your code
 		target=scaled(target,source[0].length,source.length);
-		for(int i=0;i<n;i++)
+		Color[][] cc;
+		double alpha;
+		for(int i=0;i<=n;i++)
 		{ 
-			double alpha=(double)(n-i)/n;
-			display(blend(source, target,alpha));
+            alpha=(double)(n-i)/n;
+			cc=blend(source, target,alpha);
+			display(cc);
 			StdDraw.pause(5000);
 
 		}
